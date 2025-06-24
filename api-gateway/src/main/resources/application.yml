@@ -27,3 +27,10 @@ spring:
                   - name: Path
                     args:
                       pattern: /security-service/**
+
+#              - id: vehicle-service
+#                uri: lb://VEHICLE-SERVICE
+#                predicates:
+#                  - name: Path
+#                    args:
+#                      pattern: /vehicle-service/**
