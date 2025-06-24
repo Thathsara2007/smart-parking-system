@@ -30,19 +30,34 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public int saveVehicle(VehicleDTO vehicleDTO) {
         try {
-            ResponseEntity<Boolean> response = clientVehicle.checkUser(vehicleDTO.getEmail());
+            ResponseEntity<Boolean> response = clientVehicle.existsByEmail(vehicleDTO.getEmail());
             if (response.getBody() != null && response.getBody()) {
-                Vehicle vehicle = modelMapper.map(vehicleDTO, Vehicle.class);
+                Vehicle vehicle;
+
+                if (vehicleDTO.getVehicleId() != null) {
+                    // ⚠️ Load existing entity to avoid detached merge issues
+                    vehicle = vehicleRepo.findById(vehicleDTO.getVehicleId())
+                            .orElse(new Vehicle()); // Or throw if not found
+                } else {
+                    vehicle = new Vehicle();
+                }
+
+                // ✅ Update fields manually (safer)
+                vehicle.setLicensePlate(vehicleDTO.getLicensePlate());
+                vehicle.setType(vehicleDTO.getType());
+                vehicle.setEmail(vehicleDTO.getEmail());
+
                 vehicleRepo.save(vehicle);
-                return VarList.Created; // 201 Created
+                return VarList.Created; // 201
             } else {
-                return VarList.Not_Acceptable; // 406 Not Acceptable (Email not found in User Service)
+                return VarList.Not_Acceptable; // 406
             }
         } catch (Exception e) {
-            e.printStackTrace(); // Log the error
-            return VarList.Internal_Server_Error; // 500 Internal Server Error
+            e.printStackTrace();
+            return VarList.Internal_Server_Error; // 500
         }
     }
+
 
     @Override
     public List<VehicleDTO> getAllVehicles() {

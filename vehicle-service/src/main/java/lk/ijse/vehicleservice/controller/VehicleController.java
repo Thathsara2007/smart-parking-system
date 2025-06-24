@@ -35,4 +35,5 @@ public class VehicleController {
                     .body(new ResponseDTO(VarList.Internal_Server_Error, "Server error", null));
         };
     }
+
 }

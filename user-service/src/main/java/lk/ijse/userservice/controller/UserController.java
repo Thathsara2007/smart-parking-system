@@ -89,7 +89,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/exists")
+    @GetMapping("/check")
     public ResponseEntity<Boolean> existsByEmail(@RequestParam String email) {
         if (email == null || email.isEmpty()) {
             return ResponseEntity.badRequest().body(false);

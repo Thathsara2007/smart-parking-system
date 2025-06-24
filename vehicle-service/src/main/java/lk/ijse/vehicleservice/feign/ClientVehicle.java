@@ -8,5 +8,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(name = "USER-SERVICE")
 public interface ClientVehicle {
     @GetMapping("/user-service/api/v1/user/check")
-    ResponseEntity<Boolean> checkUser(@RequestParam("email") String email);
+    ResponseEntity<Boolean> existsByEmail(@RequestParam("email") String email);
 }
