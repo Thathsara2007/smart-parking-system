@@ -34,3 +34,10 @@ spring:
                   - name: Path
                     args:
                       pattern: /vehicle-service/**
+
+              - id: parking-space-service
+                uri: lb://PARKING-SPACE-SERVICE
+                predicates:
+                  - name: Path
+                    args:
+                      pattern: /parking-space-service/**
