@@ -6,10 +6,9 @@ import lk.ijse.vehicleservice.repo.VehicleRepo;
 import lk.ijse.vehicleservice.service.VehicleService;
 import lk.ijse.vehicleservice.util.VarList;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/vehicle")
@@ -34,6 +33,19 @@ public class VehicleController {
             default -> ResponseEntity.status(500)
                     .body(new ResponseDTO(VarList.Internal_Server_Error, "Server error", null));
         };
+    }
+
+    @GetMapping("/getAllVehicles")
+    public ResponseEntity<ResponseDTO> getAllVehicles() {
+        List<VehicleDTO> vehicleList = vehicleService.getAllVehicles();
+
+        if (vehicleList.isEmpty()) {
+            return ResponseEntity.status(204)
+                    .body(new ResponseDTO(VarList.No_Content, "No vehicles found", null));
+        } else {
+            return ResponseEntity.status(200)
+                    .body(new ResponseDTO(VarList.OK, "Vehicles retrieved successfully", vehicleList));
+        }
     }
 
 }
