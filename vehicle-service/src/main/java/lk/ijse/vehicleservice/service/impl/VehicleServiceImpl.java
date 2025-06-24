@@ -31,6 +31,20 @@ public class VehicleServiceImpl implements VehicleService {
     public int saveVehicle(VehicleDTO vehicleDTO) {
         try {
             ResponseEntity<Boolean> response = clientVehicle.existsByEmail(vehicleDTO.getEmail());
+
+            if (response.getBody() != null && response.getBody()) {
+                Vehicle vehicle = modelMapper.map(vehicleDTO, Vehicle.class);
+                vehicleRepo.save(vehicle);
+                return VarList.Created;
+            } else {
+                return VarList.Not_Acceptable;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return VarList.Internal_Server_Error;
+        }
+        /*try {
+            ResponseEntity<Boolean> response = clientVehicle.existsByEmail(vehicleDTO.getEmail());
             if (response.getBody() != null && response.getBody()) {
                 Vehicle vehicle;
 
@@ -55,7 +69,7 @@ public class VehicleServiceImpl implements VehicleService {
         } catch (Exception e) {
             e.printStackTrace();
             return VarList.Internal_Server_Error; // 500
-        }
+        }*/
     }
 
 
