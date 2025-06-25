@@ -1,0 +1,335 @@
+{
+	"info": {
+		"_postman_id": "ac967255-4ea3-4053-a912-1bbd35d2b8d7",
+		"name": "SPMS Microservice Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42483029",
+		"_collection_link": "https://www.postman.com/security-cosmologist-36609167/workspace/smart-parking-system/collection/42483029-ac967255-4ea3-4053-a912-1bbd35d2b8d7?action=share&source=collection_link&creator=42483029"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "user register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"priyadarshani\",\r\n    \"email\":\"priyadarshani@gmail.com\",\r\n    \"password\":\"12345\",\r\n    \"role\":\"USER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user-service/api/v1/user/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user-service",
+								"api",
+								"v1",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "showing All registered user",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user-service/api/v1/user/getAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user-service",
+								"api",
+								"v1",
+								"user",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "enter the email after update the registerd user",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"shehan\",\r\n    \"email\":\"shehan2000@gmail.com\",\r\n    \"password\":\"12345\",\r\n    \"role\":\"USER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user-service/api/v1/user/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user-service",
+								"api",
+								"v1",
+								"user",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete for the email",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user-service/api/v1/user/delete/tharidithisarani59@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user-service",
+								"api",
+								"v1",
+								"user",
+								"delete",
+								"tharidithisarani59@gmail.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check the email alrady registered",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user-service/api/v1/user/check?email=tharidithisarani59@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user-service",
+								"api",
+								"v1",
+								"user",
+								"check"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "tharidithisarani59@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehicle",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"licensePlate\": \"CMD-5555\",\r\n  \"type\": \"bick\",\r\n  \"email\": \"shehan2000@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/vehicle-service/api/v1/vehicle/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vehicle-service",
+								"api",
+								"v1",
+								"vehicle",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All register vehicals",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"licensePlate\": \"CMD-5555\",\r\n  \"type\": \"car\",\r\n  \"email\": \"shehan2000@gmail.com\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/vehicle-service/api/v1/vehicle/getAllVehicles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vehicle-service",
+								"api",
+								"v1",
+								"vehicle",
+								"getAllVehicles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Parking Space",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"spaceId\": \"\",\r\n  \"location\": \"Ground Floor - Block A\",\r\n  \"slotCode\": \"A1-02\",\r\n  \"isAvailable\": false,\r\n  \"level\": \"3\",\r\n  \"hourlyRate\": \"100\",\r\n  \"email\": \"priyadarshani@gmail.com\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/parking-space-service/api/v1/parking-space/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"parking-space-service",
+								"api",
+								"v1",
+								"parking-space",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "registerd full zons",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"spaceId\": \"\",\r\n  \"location\": \"Ground Floor - Block A\",\r\n  \"slotCode\": \"A1-02\",\r\n  \"isAvailable\": false,\r\n  \"level\": \"3\",\r\n  \"hourlyRate\": \"100\",\r\n  \"email\": \"priyadarshani@gmail.com\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8080/parking-space-service/api/v1/parking-space/get-all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"parking-space-service",
+								"api",
+								"v1",
+								"parking-space",
+								"get-all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check parking space valid or not",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/parking-space-service/api/v1/parking-space/check-availability/A1-03",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"parking-space-service",
+								"api",
+								"v1",
+								"parking-space",
+								"check-availability",
+								"A1-03"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
