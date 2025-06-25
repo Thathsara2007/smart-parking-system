@@ -44,4 +44,39 @@ public class ParkingSpaceServiceImpl implements ParkingSpaceService {
                 return VarList.Internal_Server_Error;
             }
     }
+
+    @Override
+    public List<ParkingSpaceDTO> getAllParkingSpaces() {
+        try {
+            List<ParkingSpace> parkingSpaces = parkingSpaceRepo.findAll();
+            return modelMapper.map(parkingSpaces, new TypeToken<List<ParkingSpaceDTO>>() {}.getType());
+        } catch (Exception e) {
+            e.printStackTrace(); // log the error
+            return null; // or throw a custom exception
+        }
+    }
+
+    @Override
+    public List<ParkingSpaceDTO> getAvailableParkingSpaces() {
+        try {
+            List<ParkingSpace> parkingSpaces = parkingSpaceRepo.findAllByIsAvailable(true);
+            return modelMapper.map(parkingSpaces, new TypeToken<List<ParkingSpaceDTO>>() {
+            }.getType());
+        } catch (Exception e) {
+            e.printStackTrace(); // log the error
+            return null; // or throw a custom exception
+        }
+    }
+
+    @Override
+    public boolean isParkingSpaceAvailable(String slotCode) {
+        try {
+            return parkingSpaceRepo.findBySlotCode(slotCode)
+                    .map(ParkingSpace::isAvailable)
+                    .orElse(false);
+        } catch (Exception e) {
+            e.printStackTrace(); // log the error
+            return false; // or throw a custom exception
+        }
+    }
 }

@@ -4,10 +4,7 @@ import lk.ijse.parkingspaceservice.dto.ParkingSpaceDTO;
 import lk.ijse.parkingspaceservice.dto.ResponseDTO;
 import lk.ijse.parkingspaceservice.service.ParkingSpaceService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/parking-space")
@@ -32,5 +29,35 @@ public class ParkingSpaceController {
             default -> ResponseEntity.status(500)
                     .body(new ResponseDTO(500, "Server error", null));
         };
+    }
+
+    @GetMapping("/get-all")
+    public ResponseEntity<ResponseDTO> getAllParkingSpaces() {
+        try {
+            var parkingSpaces = parkingSpaceService.getAllParkingSpaces();
+            if (parkingSpaces != null && !parkingSpaces.isEmpty()) {
+                return ResponseEntity.ok(new ResponseDTO(200, "Parking spaces retrieved successfully", parkingSpaces));
+            } else {
+                return ResponseEntity.status(404)
+                        .body(new ResponseDTO(404, "No parking spaces found", null));
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // log the error
+            return ResponseEntity.status(500)
+                    .body(new ResponseDTO(500, "Internal server error", null));
+        }
+    }
+
+    @GetMapping("/available/{slotCode}")
+    public ResponseEntity<ResponseDTO> getAvailableParkingSpace(@PathVariable String slotCode) {
+        try {
+            boolean isAvailable = parkingSpaceService.isParkingSpaceAvailable(slotCode);
+            String message = isAvailable ? "Parking space is available" : "Parking space is not available";
+            return ResponseEntity.ok(new ResponseDTO(200, message, isAvailable));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body(new ResponseDTO(500, "Internal server error", null));
+
+        }
     }
 }

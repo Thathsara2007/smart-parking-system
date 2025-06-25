@@ -21,5 +21,4 @@ public class ParkingSpace {
     private String level;
     private String hourlyRate;
     private String email;
-
 }
